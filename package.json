@@ -1,0 +1,23 @@
+{
+  "name": "csrf-demo",
+  "version": "1.0.0",
+  "description": "Demonstration used for my CIS 491 class (Secure Web Apps)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonathandiep/CSRF-Demo.git"
+  },
+  "keywords": [
+    "CSRF",
+    "XSRF"
+  ],
+  "author": "Jonathan Diep",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jonathandiep/CSRF-Demo/issues"
+  },
+  "homepage": "https://github.com/jonathandiep/CSRF-Demo#readme"
+}
