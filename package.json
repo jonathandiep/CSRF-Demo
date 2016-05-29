@@ -4,7 +4,7 @@
   "description": "Demonstration used for my CIS 491 class (Secure Web Apps)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -19,5 +19,11 @@
   "bugs": {
     "url": "https://github.com/jonathandiep/CSRF-Demo/issues"
   },
-  "homepage": "https://github.com/jonathandiep/CSRF-Demo#readme"
+  "homepage": "https://github.com/jonathandiep/CSRF-Demo#readme",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "morgan": "^1.7.0",
+    "mysql": "^2.10.2"
+  }
 }
