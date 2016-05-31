@@ -4,13 +4,11 @@ angular.module('routes', ['ngRoute'])
   $routeProvider
     .when('/', {
       templateUrl: 'app/views/pages/home.html'
-      /*
-      controller: 'homeController',
-      controllerAs: 'home'
-      */
     })
     .when('/login', {
-      templateUrl: 'app/views/pages/login.html'
+      templateUrl: 'app/views/pages/login.html',
+      controller: 'loginCtrl',
+      controllerAs: 'login'
     })
     .when('/signup', {
       templateUrl: 'app/views/pages/signup.html',
@@ -19,6 +17,9 @@ angular.module('routes', ['ngRoute'])
     })
     .when('/dashboard', {
       templateUrl: 'app/views/pages/dashboard.html'
+    })
+    .when('/thanks', {
+      templateUrl: 'app/views/pages/thanks.html'
     })
 
   $locationProvider.html5Mode(true);

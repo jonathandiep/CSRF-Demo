@@ -12,6 +12,33 @@ module.exports = function(app, passport) {
     res.json(req.user);
   });
 
+  app.post('/login', passport.authenticate('local-login'), (req, res) => {
+    delete req.user.password;
+    console.log(req.user);
+    if (req.body.remember) {
+      req.session.cookie.maxAge = 1000 * 60 * 3;
+    } else {
+      req.session.cookie.expires = false;
+    }
+    res.json(req.user);
+  });
+
+  app.get('/user', (req, res) => {
+    if (req.user) {
+      delete req.user.password;
+      delete req.user.money;
+      console.log(req.user);
+      res.json(req.user);
+    } else {
+      res.send('user is not logged in');
+    }
+
+  });
+
+  app.get('/logout', (req, res) => {
+    req.logout();
+    res.send('bye');
+  });
 
 };
 

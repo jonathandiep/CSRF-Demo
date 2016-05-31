@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../assets/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="app/views/styles/app.css" />
   </head>
-  <body ng-app="app">
+  <body ng-app="app" ng-controller="sessCtrl as sess">
 
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
@@ -26,17 +26,20 @@
             <span class="icon-bar"></span>
           </button>
         </div>
-        <div class="collapse navbar-collapse">
+        <div class="collapse navbar-collapse" ng-if="!sess.loggedIn">
           <div class="navbar-right">
             <a type="button" href="/login" class="btn btn-primary navbar-btn">Log in</a>
           </div>
-          <!--
-          <button type="button" class="btn btn-primary navbar-right navbar-btn" data-toggle="modal" data-target="#loginModal">
-            Login
-          </button>
-          -->
           <ul class="nav navbar-nav navbar-right">
             <li><a href="/signup">Sign up</a></li>
+          </ul>
+        </div>
+        <div class="collapse navbar-collapse" ng-if="sess.loggedIn">
+          <div class="navbar-right">
+            <a type="button" ng-click="sess.logout()" class="btn btn-danger navbar-btn">Log out</a>
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/transfer">Transfer Funds</a></li>
           </ul>
         </div>
       </div>
@@ -49,6 +52,7 @@
     <script src="../assets/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../assets/angular/angular.js"></script>
     <script src="../assets/angular-route/angular-route.js"></script>
+    <script src="../assets/angular-cookies/angular-cookies.js"></script>
 
     <!-- Angular Scripts -->
     <script src="app/controllers/accountCtrl.js"></script>

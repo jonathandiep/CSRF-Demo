@@ -15,7 +15,7 @@ connection.query('USE ' + config.mysqldb);
 module.exports = function(passport) {
   // used to serialize the user for the session
   passport.serializeUser(function(user, done) {
-    done(null, user.id);
+    done(null, user.idAccount);
   });
 
   // used to deserialize the user
@@ -51,7 +51,7 @@ module.exports = function(passport) {
 
           console.log(userInfo);
           connection.query(insertQuery, [userInfo.firstName, userInfo.lastName, userInfo.email, userInfo.password], function(err, rows) {
-            userInfo.id = rows.insertId;
+            userInfo.idAccount = rows.insertId;
 
             return done(null, userInfo);
           });
@@ -60,5 +60,31 @@ module.exports = function(passport) {
     })
   );
 
+  passport.use(
+    'local-login',
+    new LocalStrategy({
+      usernameField : 'email',
+      passwordField : 'password',
+      passReqToCallback : true
+    },
+    function(req, email, password, done) {
+      connection.query("SELECT * FROM Account WHERE email = ?", [email], function(err, rows){
+        if (err)
+          return done(err);
+        if (!rows.length) {
+          return done(null, false, req.flash('loginMessage', 'No user found.'));
+        }
+
+        // if the user is found but the password is wrong
+        if (!bcrypt.compareSync(password, rows[0].password)) {
+          return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
+        }
+
+        // all is well, return successful user
+        console.log(rows[0]);
+        return done(null, rows[0]);
+      });
+    })
+  );
 
 }
