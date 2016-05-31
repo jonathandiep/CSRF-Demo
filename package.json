@@ -4,7 +4,7 @@
   "description": "Demonstration used for my CIS 491 class (Secure Web Apps)",
   "main": "index.js",
   "scripts": {
-    "build": "nodemon index.js"
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -21,9 +21,17 @@
   },
   "homepage": "https://github.com/jonathandiep/CSRF-Demo#readme",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.1",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
     "express": "^4.13.4",
-    "morgan": "^1.7.0",
-    "mysql": "^2.10.2"
+    "express-session": "^1.13.0",
+    "mysql": "^2.10.2",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "morgan": "^1.7.0"
   }
 }
