@@ -39,6 +39,7 @@
             <a type="button" ng-click="sess.logout()" class="btn btn-danger navbar-btn">Log out</a>
           </div>
           <ul class="nav navbar-nav navbar-right">
+            <li><a href="/dashboard">Dashboard</a></li>
             <li><a href="/transfer">Transfer Funds</a></li>
           </ul>
         </div>
@@ -52,10 +53,11 @@
     <script src="../assets/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../assets/angular/angular.js"></script>
     <script src="../assets/angular-route/angular-route.js"></script>
-    <script src="../assets/angular-cookies/angular-cookies.js"></script>
 
     <!-- Angular Scripts -->
     <script src="app/controllers/accountCtrl.js"></script>
+    <script src="app/controllers/dashboardCtrl.js"></script>
+    <script src="app/controllers/transferCtrl.js"></script>
     <script src="app/services/accountService.js"></script>
     <script src="app/routes.js"></script>
     <script src="app/app.js"></script>

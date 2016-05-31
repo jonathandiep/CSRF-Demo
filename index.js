@@ -4,7 +4,6 @@ var app = express();
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
-var mysql = require('mysql');
 var passport = require('passport');
 var flash = require('connect-flash');
 var path = require('path');

@@ -23,6 +23,11 @@ angular.module('accountService', [])
         });
     };
 
+    accountFactory.send = function(transactionData) {
+      console.log('sending transaction data: ' + transactionData);
+      return $http.get('/send', transactionData);
+    };
+
     accountFactory.login = function(userData) {
       return $http.post('/login', userData);
     };
@@ -30,6 +35,7 @@ angular.module('accountService', [])
     accountFactory.logout = function() {
       return $http.get('/logout');
     };
+
 
     return accountFactory;
   });

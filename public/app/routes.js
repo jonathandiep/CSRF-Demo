@@ -16,7 +16,14 @@ angular.module('routes', ['ngRoute'])
       controllerAs: 'account'
     })
     .when('/dashboard', {
-      templateUrl: 'app/views/pages/dashboard.html'
+      templateUrl: 'app/views/pages/dashboard.html',
+      controller: 'dashCtrl',
+      controllerAs: 'dash'
+    })
+    .when('/transfer', {
+      templateUrl: 'app/views/pages/transfer.html',
+      controller: 'sendMoneyCtrl',
+      controllerAs: 'money'
     })
     .when('/thanks', {
       templateUrl: 'app/views/pages/thanks.html'

@@ -10,7 +10,7 @@ var connection = mysql.createConnection({
   database: config.mysqldb
 });
 
-connection.query('USE ' + config.mysqldb);
+connection.connect();
 
 module.exports = function(passport) {
   // used to serialize the user for the session
