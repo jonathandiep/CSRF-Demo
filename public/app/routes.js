@@ -25,6 +25,11 @@ angular.module('routes', ['ngRoute'])
       controller: 'sendMoneyCtrl',
       controllerAs: 'money'
     })
+    .when('/transfer-v2', {
+      templateUrl: 'app/views/pages/transfer-v2.html',
+      controller: 'csrfCtrl',
+      controllerAs: 'money'
+    })
     .when('/thanks', {
       templateUrl: 'app/views/pages/thanks.html'
     })

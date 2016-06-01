@@ -45,7 +45,7 @@ module.exports = function(app, passport) {
 
   });
 
-  app.get('/send', (req, res) => {
+  app.post('/send', (req, res) => {
     // create connection and transfer money
     var from = req.query.from;
     var to = req.query.to;

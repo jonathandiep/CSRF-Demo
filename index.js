@@ -1,18 +1,15 @@
 var express = require('express');
 var session = require('express-session');
 var app = express();
+var mysql = require('mysql');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var passport = require('passport');
-var flash = require('connect-flash');
+var csrf = require('csurf');
 var path = require('path');
 var config = require('./config/config');
 
-require('./config/passport')(passport);
-
-// DATABASE CONNECTION DETAILS (MYSQL)
-/*
 var connection = mysql.createConnection({
   host: config.host,
   user: config.user,
@@ -21,8 +18,11 @@ var connection = mysql.createConnection({
 });
 
 connection.connect();
-*/
 
+require('./config/passport')(passport);
+
+var csrfProtection = csrf({ cookie: true });
+var parseForm = bodyParser.urlencoded({ extended: false });
 
 app.use(morgan('dev'));
 app.use(cookieParser());
@@ -45,7 +45,6 @@ app.use(session({
  } )); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
-app.use(flash());
 
 app.use(express.static(`${__dirname}/public`));
 
@@ -54,6 +53,32 @@ var apiRoutes = require('./app/api')(app);
 app.use('/api', apiRoutes);
 
 require('./app/routes')(app, passport);
+
+app.get('/csrfToken', csrfProtection, (req, res) => {
+  res.json({
+    csrfToken: req.csrfToken()
+  });
+});
+
+app.post('/send-v2', parseForm, csrfProtection, (req, res) => {
+  var from = req.query.from;
+  var to = req.query.to;
+  var amount = Number(req.query.amount).toFixed(2);
+  console.log(req.query);
+  connection.query(`INSERT INTO Transaction (toAccount, fromAccount, amount) VALUES ('${to}', '${from}', ${amount});`, (err, rows) => {
+    if (err) throw err;
+
+    connection.query(`UPDATE Account SET money = money - ${amount} WHERE email = '${from}'`, (err, rows) => {
+      if (err) throw err;
+
+      connection.query(`UPDATE Account SET money = money + ${amount} WHERE email = '${to}';`, (err, rows) => {
+        if (err) throw err;
+
+      })
+    })
+  });
+  res.send(`$${req.query.amount} sent to ${req.query.to}`);
+});
 
 // catchall route (send users to Angular frontend)
 app.get('*', (req, res) => {
