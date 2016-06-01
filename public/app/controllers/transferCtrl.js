@@ -6,36 +6,6 @@ angular.module('transferCtrl', [])
     Account.accountDetails()
       .success(function(data) {
         vm.user = data;
-      });
-
-    vm.send = function() {
-      var req = {
-        method: 'POST',
-        url: 'http://localhost:5000/send',
-        params: {
-          from: vm.user.email,
-          to: vm.send.email,
-          amount: vm.send.amount
-        }
-      }
-
-      $http(req)
-        .then(function(res) {
-          console.log(res.data);
-          vm.message = res.data;
-          vm.send.email = '';
-          vm.send.amount = '';
-        })
-    }
-
-  })
-
-  .controller('csrfCtrl', function($http, Account) {
-    var vm = this;
-
-    Account.accountDetails()
-      .success(function(data) {
-        vm.user = data;
         console.log(vm.user);
       });
 
@@ -48,7 +18,7 @@ angular.module('transferCtrl', [])
     vm.send = function() {
       var req = {
         method: 'POST',
-        url: 'http://localhost:5000/send-v2',
+        url: 'http://localhost:5000/send',
         params: {
           from: vm.user.email,
           to: vm.send.email,
@@ -65,4 +35,5 @@ angular.module('transferCtrl', [])
           vm.send.amount = '';
         })
     }
-  })
+
+  });
