@@ -42,7 +42,7 @@ angular.module('transferCtrl', [])
     $http.get('http://localhost:5000/csrfToken')
       .then(function(res) {
         vm.csrfToken = res.data.csrfToken;
-        console.log(res.data.csrfToken);
+        console.log('CSRF Token: ' + res.data.csrfToken);
       });
 
     vm.send = function() {
